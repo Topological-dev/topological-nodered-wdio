@@ -1,4 +1,3 @@
-const { clearConfigCache } = require('prettier')
 const wdio = require('webdriverio')
 let newSessionNode
 
