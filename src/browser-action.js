@@ -19,7 +19,7 @@ module.exports = function(RED) {
           node.log = 'Get the url of the web page.'
           msg.payload = await browser.getUrl()
         } else if (config.action === 'navigateTo') {
-          node.log = `Navigate to the "${url}".`
+          node.log = `Navigate to url: "${url}".`
           await browser.navigateTo(url)
         } else if (config.action === 'back') {
           node.log = 'Go to previous page (browser back feature).'

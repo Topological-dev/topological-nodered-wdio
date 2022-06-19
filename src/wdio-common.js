@@ -146,6 +146,6 @@ module.exports.log = async (node) => {
   let context = node.context()
   let stepCount = await (context.global.get('stepCount') || 0) + 1
   let document = await context.global.get('document') || ''
-  await context.global.set('document', `${document}\n${stepCount}. Node: ${node.name} - \t${node.log}`)
+  await context.global.set('document', `${document}\n${stepCount}. Node: ${node.name} - ${node.log}`)
   await context.global.set('stepCount', stepCount)
 }
