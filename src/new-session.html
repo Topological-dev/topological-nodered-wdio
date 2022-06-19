@@ -1,0 +1,96 @@
+<script type="text/javascript">
+  function setValue() {
+    return $('#node-input-killSession').val()
+  }
+  //https://9bbb33aa-ac83-4087-9829-a264f90452fe@chrome.browserless.io:443/webdriver
+  function setProvider() {
+    if ($('#node-input-webdriverProvider').val() === 'browserless.io') {
+      $('#node-input-webdriverUri').attr(
+        'placeholder',
+        'https://<apikey>:chrome.browserless.io:443/webdriver'
+      )
+      $('#node-input-webdriverBrowser').val('chrome')
+      $('#row-browser').hide()
+    } else if ($('#node-input-webdriverProvider').val() === 'local') {
+      $('#row-browser').show()
+    }
+  }
+
+  RED.nodes.registerType('new-session', {
+    category: 'Webdriver IO',
+    color: '#a6bbcf',
+    defaults: {
+      name: { value: '' },
+      webdriverUri: { value: '' },
+      webdriverProvider: { value: '' },
+      webdriverBrowser: { value: '' },
+      logLevel: { value: 'error' },
+      killSession: { value: setValue() }
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: 'white-globe.png',
+    label: function() {
+      return this.name || 'new session'
+    }
+  })
+</script>
+
+<script type="text/x-red" data-template-name="new-session">
+  <div class="form-row">
+      <label for="node-input-webdriverProvider"><i class="fa fa-globe"></i> Webdriver Remote Provider</label>
+      <select type="text" id="node-input-webdriverProvider" style="width:70%;" onchange="setProvider()">
+          <option value="browserless.io">browserless.io</option>
+          <option value="local" selected>Local Webdriver</option>
+      </select>
+  </div>
+  <div class="form-row">
+      <label for="node-input-webdriverUri"><i class="fa fa-globe"></i> Webdriver Host URI</label>
+      <input id="node-input-webdriverUri" type="text" placeholder="https://host:port/path">
+  </div>
+  <div class="form-row" id="row-browser">
+      <label for="node-input-webdriverBrowser"><i class="fa fa-globe"></i> Browser</label>
+      <select type="text" id="node-input-webdriverBrowser" style="width:70%;">
+          <option value="chrome" selected>Chrome</option>
+          <option value="chromium">Chromium</option>
+      </select>
+  </div>
+  <div class="form-row">
+      <label for="node-input-logLevel"><i class="fa fa-tasks"></i> Log Level</label>
+      <select type="text" id="node-input-logLevel" style="width:70%;">
+          <option value="trace">Trace</option>
+          <option value="debug">Debug</option>
+          <option value="info">Info</option>
+          <option value="warn">Warn</option>
+          <option value="error" selected>Error</option>
+          <option value="silent">Silent</option>
+      </select>
+  </div>
+  <div class="form-row">
+      <label for="node-input-killSession"><i class="fa fa-tasks"></i> Kill existing session on flow deploy</label>
+      <input id="node-input-killSession" type="checkbox" onclick="setValue()" style="width:auto;">
+  </div>
+  <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input id="node-input-name" type="text">
+  </div>
+</script>
+
+<script type="text/x-red" data-help-name="new-session">
+  <h3>Creates new session and also sets the "wdio_browser" global variable to the new session object.</h3>
+  <h3>Inputs</h3>
+      <dl class="message-properties">
+          <dt>webdriverProvider: <span class="property-type">string</span></dt>
+          <dd>Webdriver server name.</dd>
+          <dt>webdriverUri: <span class="property-type">string</span></dt>
+          <dd>The string format should be <protocal>://<hotsname>:<port number>/<path>, user 80/8080/443 if it is service based webdriver provider.</dd>
+          <dd><code>msg.webdriverUri</code> can be used by leaving the webdriverUri field blank.</dd>
+          <dt>Browser: <span class="property-type">string</span></dt>
+          <dd>Current configurations are only for chrome.</dd>
+          <dd><code>msg.webdriverBrowser</code> can be used by leaving the webdriverBrowser blank.</dd>
+          <dt>logLevel: <span class="property-type">string</span></dt>
+          <dd>Select the log level to display the logs on console during run.</dd>
+          <dt>killSession: <span class="property-type">Bool</span></dt>
+          <dd>Kill open session during deploy. This would be helpful to debug the changes by not closing the current browser.</dd>
+      </dl>
+</script>

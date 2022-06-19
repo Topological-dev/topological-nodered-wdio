@@ -1,0 +1,43 @@
+{
+  "name": "topological-nodered-wdio",
+  "description": "Open source WebdriverIO nodes for Node-RED",
+  "version": "0.2.6",
+  "author": "topological",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Topological-dev/node-red-topological-wdio"
+  },
+  "keywords": [
+    "node-red",
+    "topological"
+  ],
+  "node-red": {
+    "version": ">=2.0.0",
+    "nodes": {
+      "delete-session": "src/delete-session.js",
+      "element-action": "src/element-action.js",
+      "new-session": "src/new-session.js",
+      "browser-action": "src/browser-action.js",
+      "element-check": "src/element-check.js",
+      "alert-action": "src/alert-action.js",
+      "dropdown-action": "src/dropdown-action.js",
+      "window-action": "src/window-action.js",
+      "frame-action": "src/frame-action.js",
+      "execute-script": "src/execute-script.js",
+      "explicit-wait": "src/explicit-wait.js",
+      "implicit-wait-config": "src/implicit-wait-config.js"
+    }
+  },
+  "dependencies": {
+    "@wdio/allure-reporter": "^7.19.7",
+    "@wdio/cli": "^7.19.7",
+    "webdriverio": "^7.19.7"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=12.0.0"
+  }
+}

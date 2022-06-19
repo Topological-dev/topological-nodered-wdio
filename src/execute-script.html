@@ -1,0 +1,92 @@
+<script type="text/javascript">
+  RED.nodes.registerType('execute-script', {
+    category: 'Webdriver IO',
+    color: '#a6bbcf',
+    defaults: {
+      name: { value: '' },
+      locateUsing: { value: 'xpath' },
+      locateValue: { value: '' },
+      action: { value: 'sync' },
+      script: { value: '' }
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: 'white-globe.png',
+    label: function() {
+      return this.name || 'execute script'
+    }
+  })
+</script>
+
+<script type="text/x-red" data-template-name="execute-script">
+  <div class="form-row">
+      <label for="node-input-locateUsing"><i class="fa fa-tasks"></i> Locate Method</label>
+      <select type="text" id="node-input-locateUsing" style="width:70%;">
+          <option value="id">id</option>
+          <option value="name">name</option>
+          <option value="css selector">CSS selector</option>
+          <option value="link text">Link text</option>
+          <option value="partial link text">Partial link text</option>
+          <option value="tag name">Tag name</option>
+          <option value="xpath" selected>XPath</option>
+      </select>
+  </div>
+  <div class="form-row">
+      <label for="node-input-locateValue"><i class="fa fa-tasks"></i> Selector</label>
+      <input id="node-input-locateValue" type="text">
+  </div>
+  <div class="form-row">
+      <label for="node-input-action"><i class="fa fa-tasks"></i> Action</label>
+      <select type="text" id="node-input-action" style="width:70%;">
+          <option value="sync">Sync</option>
+          <option value="aSync">Async</option>
+      </select>
+  </div>
+  <div class="form-row">
+      <label for="node-input-script"><i class="fa fa-tasks"></i> Script</label>
+      <input id="node-input-script" type="text" placeholder="javascript in string">
+  </div>
+  <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input id="node-input-name" type="text">
+  </div>
+</script>
+
+<script type="text/x-red" data-help-name="execute-script">
+  <h3>Execute javascript commands on a target web element.</h3>
+  <h3>Inputs</h3>
+        <dl class="message-properties">
+
+          <dt><code>mgs.locateUsing</code>: <span class="property-type">string</span></dt>
+          <dd>specifies the type of web element identifier:
+            <ul>
+                <li>id</li>
+                <li>name</li>
+                <li>CSS selector</li>
+                <li>Link text</li>
+                <li>Partial link text</li>
+                <li>Tag name</li>
+                <li>XPath</li>
+            </ul>
+            <br>
+          </dd>
+          <dt><code>msg.locateValue</code><span class="property-type">string</span></dt>
+          <dd>value passed to the web element identifier (Locate Method)<br></dd>
+
+          <dt><code>msg.script</code><span class="property-type">string</span></dt>
+          <dd>This is the script that would run in the context frame; the selected web element(Selector) would be passed as an argument.</dd>
+        </dl>
+
+  <h3>Details</h3>
+   <p><b>Locate Method</b> specifies the method used to target the web element. This option can be selected manually from the Properties panel OR it can be received from <code>mgs.locateUsing</code><br></p>
+   <p><b>Selector</b> value used by the Locate Method to target the web element. This option can be selected manually from the Properties panel OR it can be received from <code>mgs.locateValue</code><br></p>
+   <p><b>Action</b>
+        <ul>
+            <li>Sync: executes a JavaScript function in the context of the current browsing context. Selector is passed in as an argument. <code>browser.executeScript(script, args)</code></li>
+            <li>Async: inject a snippet of JavaScript into the page for asynchronous execution in the context of the currently selected frame. Selector is passed in as argument/ <code>browser.executeAsyncScript(script, args)</code></li>
+        </ul>
+   </p>
+   <p><b>Script</b> The script that would would run in the context browser<br></p>
+</script>
+
+
