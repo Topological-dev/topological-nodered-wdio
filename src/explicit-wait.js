@@ -19,7 +19,7 @@ module.exports = function(RED) {
         )
 
         let time = parseInt(config.time) || msg.time
-        let reverse = config.reverse || msg.reverse
+        let reverse = config.reverse === 'true' || msg.reverse
         let error = config.error || msg.error
 
         let boolReverse = reverse === 'false' ? false : true

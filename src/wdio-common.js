@@ -91,12 +91,7 @@ module.exports.getElement = async (browser, using, value) => {
       break
   }
 
-  try {
-    element = await browser.$(selector)
-  } catch (e) {
-    throw e
-  }
-
+  element = await browser.$(selector)
   return element
 }
 
