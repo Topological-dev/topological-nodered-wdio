@@ -35,15 +35,11 @@ module.exports = function(RED) {
           await element.waitUntil()
         }
 
-        if (error) {
-          await common.log(node)
-          common.handleError(error, node, msg)
-        } else {
-          await common.log(node)
-          common.successStatus(node)
-          node.send(msg)
-        }
+        await common.log(node)
+        common.successStatus(node)
+        node.send(msg)
       } catch (e) {
+        await common.log(node)
         common.handleError(e, node, msg)
       }
     })

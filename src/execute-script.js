@@ -31,6 +31,7 @@ module.exports = function(RED) {
         common.successStatus(node)
         node.send(msg)
       } catch (e) {
+        await common.log(node)
         common.handleError(e, node, msg)
       }
     })

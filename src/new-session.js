@@ -25,6 +25,7 @@ module.exports = function(RED) {
         msg.payload = b.sessionId
         node.send(msg)
       } catch (e) {
+        await common.log(node)
         common.handleError(e, node, msg)
       }
     })
@@ -39,6 +40,7 @@ module.exports = function(RED) {
           node.log('Disconnected webdriver session ' + sessionId)
         }
       } catch (e) {
+        await common.log(node)
         common.handleError(e, node, msg)
       }
       done()
