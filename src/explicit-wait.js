@@ -22,22 +22,21 @@ module.exports = function(RED) {
         let reverse = config.reverse === 'true' || msg.reverse
         let error = config.error || msg.error
 
-        let boolReverse = reverse === 'false' ? false : true
-
         if (config.action === 'displayed') {
           node.log = `Waiting for the element to be displayed for ${time}, identified using ${locateUsing}: "${locateValue}".`
-          await element.waitForDisplayed(time, boolReverse, error, 2000)
+          await element.waitForDisplayed({timeout: time, reverse: reverse, timeoutMsg: error, interval : 2000})
         } else if (config.action === 'enabled') {
           node.log = `Waiting for the element to be enabled for ${time}, identified using ${locateUsing}: "${locateValue}".`
-          await element.waitForEnabled(time, boolReverse, error, 2000)
+          await element.waitForEnabled({timeout: time, reverse: reverse, timeoutMsg: error, interval : 2000})
         } else if (config.action === 'exists') {
           node.log = `Waiting for the element to be exists for ${time}, identified using ${locateUsing}: "${locateValue}".`
-          await element.waitForExist(time, boolReverse, error, 2000)
+          await element.waitForExist({timeout: time, reverse: reverse, timeoutMsg: error, interval : 2000})
         } else if (config.action === 'until') {
           await element.waitUntil()
         }
 
         if (error) {
+          await common.log(node)
           common.handleError(error, node, msg)
         } else {
           await common.log(node)
