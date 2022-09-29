@@ -71,27 +71,37 @@ module.exports.getElementId = async (browser, using, value) => {
 }
 
 module.exports.getElement = async (browser, using, value) => {
-  let selector = ''
-  let element
-  switch (using) {
-    case 'id':
-      selector = '#' + value
-      break
-    case 'name':
-      selector = value
-      break
-    case 'className':
-      selector = '.' + value
-      break
-    case 'selector':
-      selector = value
-      break
-    default:
-      selector = value
-      break
-  }
+  let locator = ''
+    switch (using) {
+        case 'id':
+            locator = `#${value}`
+            break
+        case 'name':
+            locator = `[name='${value}']`
+            break
+        case 'className':
+            locator = `.${value}`
+            break
+        case 'tagName':
+            locator = value
+            break
+        case 'cssSelector':
+            locator = value
+            break
+        case 'text':
+            locator = `=${value}`
+            break
+        case 'partialText':
+            locator = `*=${value}`
+            break
+        case 'xPath':
+            locator = value
+            break
+        default:
+            locator = value
+    }
 
-  element = await browser.$(selector)
+  element = await browser.$(locator)
   return element
 }
 

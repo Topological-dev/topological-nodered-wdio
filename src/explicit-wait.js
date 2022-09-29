@@ -18,7 +18,7 @@ module.exports = function(RED) {
           locateValue
         )
 
-        let time = parseInt(config.time) || msg.time
+        let time = parseInt(config.time || msg.time)
         let reverse = config.reverse === 'true' || msg.reverse
         let error = config.error || msg.error
 
@@ -26,13 +26,13 @@ module.exports = function(RED) {
 
         if (config.action === 'displayed') {
           node.log = `Waiting for the element to be displayed for ${time}, identified using ${locateUsing}: "${locateValue}".`
-          await element.waitForDisplayed(time, boolReverse, error)
+          await element.waitForDisplayed(time, boolReverse, error, 2000)
         } else if (config.action === 'enabled') {
           node.log = `Waiting for the element to be enabled for ${time}, identified using ${locateUsing}: "${locateValue}".`
-          await element.waitForEnabled(time, boolReverse, error)
+          await element.waitForEnabled(time, boolReverse, error, 2000)
         } else if (config.action === 'exists') {
           node.log = `Waiting for the element to be exists for ${time}, identified using ${locateUsing}: "${locateValue}".`
-          await element.waitForExist(time, boolReverse, error)
+          await element.waitForExist(time, boolReverse, error, 2000)
         } else if (config.action === 'until') {
           await element.waitUntil()
         }
