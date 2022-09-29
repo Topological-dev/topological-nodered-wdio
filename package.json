@@ -1,7 +1,7 @@
 {
   "name": "topological-nodered-wdio",
   "description": "Open source WebdriverIO nodes for Node-RED",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "author": "topological",
   "license": "MIT",
   "repository": {

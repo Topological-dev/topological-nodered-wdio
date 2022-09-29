@@ -18,7 +18,7 @@ module.exports = function(RED) {
           locateValue
         )
 
-        let time = config.time || msg.time
+        let time = parseInt(config.time) || msg.time
         let reverse = config.reverse || msg.reverse
         let error = config.error || msg.error
 
