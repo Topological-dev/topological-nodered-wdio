@@ -12,7 +12,7 @@ module.exports = function(RED) {
         let locateValue = config.locateValue || msg.locateValue
 
         let browser = await common.getBrowser(node.context())
-        let element = await common.getElement(
+        let locator = await common.getLocator(
           browser,
           locateUsing,
           locateValue
@@ -24,15 +24,15 @@ module.exports = function(RED) {
 
         if (config.action === 'displayed') {
           node.log = `Waiting for the element to be displayed for ${time}, identified using ${locateUsing}: "${locateValue}".`
-          await element.waitForDisplayed({timeout: time, reverse: reverse, timeoutMsg: error, interval : 2000})
+          await browser.$(locator).waitForDisplayed({timeout: time, reverse: reverse, timeoutMsg: error, interval : 2000})
         } else if (config.action === 'enabled') {
           node.log = `Waiting for the element to be enabled for ${time}, identified using ${locateUsing}: "${locateValue}".`
-          await element.waitForEnabled({timeout: time, reverse: reverse, timeoutMsg: error, interval : 2000})
+          await browser.$(locator).waitForEnabled({timeout: time, reverse: reverse, timeoutMsg: error, interval : 2000})
         } else if (config.action === 'exists') {
           node.log = `Waiting for the element to be exists for ${time}, identified using ${locateUsing}: "${locateValue}".`
-          await element.waitForExist({timeout: time, reverse: reverse, timeoutMsg: error, interval : 2000})
+          await browser.$(locator).waitForExist({timeout: time, reverse: reverse, timeoutMsg: error, interval : 2000})
         } else if (config.action === 'until') {
-          await element.waitUntil()
+          await browser.$(locator).waitUntil()
         }
 
         await common.log(node)

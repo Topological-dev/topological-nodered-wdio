@@ -70,7 +70,7 @@ module.exports.getElementId = async (browser, using, value) => {
   return elementId
 }
 
-module.exports.getElement = async (browser, using, value) => {
+module.exports.getLocator = async (browser, using, value) => {
   let locator = ''
     switch (using) {
         case 'id':
@@ -101,8 +101,7 @@ module.exports.getElement = async (browser, using, value) => {
             locator = value
     }
 
-  element = await browser.$(locator)
-  return element
+  return locator
 }
 
 module.exports.handleError = (e, node, msg) => {
