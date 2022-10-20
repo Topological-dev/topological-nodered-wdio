@@ -18,6 +18,7 @@ module.exports = function (RED) {
           locateUsing,
           locateValue
         )
+        await element.waitForDisplayed({timeout: 10000, reverse: false, timeoutMsg: 'unable to find', interval : 2000})
 
         if (config.check === 'clickable') {
           node.log = `Check the webelement is clickable, identified using ${locateUsing}: "${locateValue}".`
@@ -45,8 +46,17 @@ module.exports = function (RED) {
         common.successStatus(node)
         node.send(msg)
       } catch (e) {
-        await common.log(node)
-        common.handleError(e, node, msg)
+        if(e.message == 'unable to find'){
+          msg.payload = false
+          node.log = 'Webelement is NOT displayed, identified using ${locateUsing}: "${locateValue}".`
+          await common.log(node)
+          common.successStatus(node)
+          node.send(msg)
+        }
+        else{
+          await common.log(node)
+          common.handleError(e, node, msg)
+        }
       }
     })
   }
