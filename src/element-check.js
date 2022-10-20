@@ -48,7 +48,7 @@ module.exports = function (RED) {
       } catch (e) {
         if(e.message == 'unable to find'){
           msg.payload = false
-          node.log = 'Webelement is NOT displayed, identified using ${locateUsing}: "${locateValue}".`
+          node.log = `Webelement is NOT displayed, identified using ${locateUsing}: "${locateValue}".`
           await common.log(node)
           common.successStatus(node)
           node.send(msg)
