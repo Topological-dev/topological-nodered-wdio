@@ -27,19 +27,19 @@ module.exports = function (RED) {
           msg.payload =  await element.isDisplayed()
         } else if (config.check === 'displayedInView') {
           node.log = `Check the webelement is displayed in view port, identified using ${locateUsing}: "${locateValue}".`
-          msg.payload = await browser.isDisplayedInViewport()
+          msg.payload = await element.isDisplayedInViewport()
         } else if (config.check === 'enabled') {
           node.log = `Check the webelement is enabled, identified using ${locateUsing}: "${locateValue}".`
           msg.payload =  await element.isEnabled()
         } else if (config.check === 'existing') {
           node.log = `Check the webelement is existing, identified using ${locateUsing}: "${locateValue}".`
-          msg.payload = await browser.isExisting()
+          msg.payload = await element.isExisting()
         } else if (config.check === 'focused') {
           node.log = `Check the webelement is focused, identified using ${locateUsing}: "${locateValue}".`
           msg.payload =  await element.isFocused()
         } else if (config.check === 'selected') {
           node.log = `Check the webelement is selected, identified using ${locateUsing}: "${locateValue}".`
-          msg.payload = await browser.isSelected()
+          msg.payload = await element.isSelected()
         }
         await common.log(node)
         common.successStatus(node)
