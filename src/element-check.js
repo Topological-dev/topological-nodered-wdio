@@ -13,26 +13,33 @@ module.exports = function (RED) {
 
         let browser = await common.getBrowser(node.context())
 
-        let elementId = await common.getElementId(
+        let element = await common.getElement(
           browser,
           locateUsing,
           locateValue
         )
 
-        if (config.check === 'selected') {
-          node.log = `Check the webelement is selected, identified using ${locateUsing}: "${locateValue}".`
-          msg.payload = await browser.isElementSelected(elementId)
+        if (config.check === 'clickable') {
+          node.log = `Check the webelement is clickable, identified using ${locateUsing}: "${locateValue}".`
+          msg.payload = await element.isClickable()
+        } else if (config.check === 'displayed') {
+          node.log = `Check the webelement is displayed, identified using ${locateUsing}: "${locateValue}".`
+          msg.payload =  await element.isDisplayed()
+        } else if (config.check === 'displayedInView') {
+          node.log = `Check the webelement is displayed in view port, identified using ${locateUsing}: "${locateValue}".`
+          msg.payload = await browser.isDisplayedInViewport()
         } else if (config.check === 'enabled') {
           node.log = `Check the webelement is enabled, identified using ${locateUsing}: "${locateValue}".`
-          msg.payload = await browser.isElementEnabled(elementId)
-        } else if (config.check === 'displayed') {
-          let element = await common.getElement(
-            browser,
-            locateUsing,
-            locateValue
-          )
-          node.log = `Check the webelement is displayed, identified using ${locateUsing}: "${locateValue}".`
-          msg.payload = await browser.isElementDisplayed(element.elementId)
+          msg.payload =  await element.isEnabled()
+        } else if (config.check === 'existing') {
+          node.log = `Check the webelement is existing, identified using ${locateUsing}: "${locateValue}".`
+          msg.payload = await browser.isExisting()
+        } else if (config.check === 'focused') {
+          node.log = `Check the webelement is focused, identified using ${locateUsing}: "${locateValue}".`
+          msg.payload =  await element.isFocused()
+        } else if (config.check === 'selected') {
+          node.log = `Check the webelement is selected, identified using ${locateUsing}: "${locateValue}".`
+          msg.payload = await browser.isSelected()
         }
         await common.log(node)
         common.successStatus(node)
