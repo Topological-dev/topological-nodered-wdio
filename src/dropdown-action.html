@@ -33,10 +33,10 @@
     inputs: 1,
     outputs: 1,
     icon: 'white-globe.png',
-    label: function() {
+    label: function () {
       return this.name || 'dropdown action'
     },
-    oneditprepare: function() {
+    oneditprepare: function () {
       setDropdownAction()
     }
   })
@@ -46,10 +46,14 @@
   <div class="form-row">
       <label for="node-input-locateUsing"><i class="fa fa-tasks"></i> Locate Method</label>
       <select type="text" id="node-input-locateUsing" style="width:70%;">
-          <option value="id">id</option>
-          <option value="name">name</option>
-          <option value="className">Class Name</option>
-          <option value="selector">Jquery Selector</option>
+        <option value="id">id</option>
+        <option value="name">name</option>
+        <option value="className">Class Name</option>
+        <option value="css selector">CSS selector</option>
+        <option value="link text">Link text</option>
+        <option value="partial link text">Partial link text</option>
+        <option value="tag name">Tag name</option>
+        <option value="xpath" selected>XPath</option>
       </select>
   </div>
   <div class="form-row">

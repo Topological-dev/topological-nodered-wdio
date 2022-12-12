@@ -12,11 +12,12 @@ module.exports = function(RED) {
         let locateValue = config.locateValue || msg.locateValue
 
         let browser = await common.getBrowser(node.context())
-        let element = await common.getElement(
+        let locator = await common.getLocator(
           browser,
           locateUsing,
           locateValue
         )
+        let element = await browser.$(locator)
 
         let text = config.text || msg.text
         let attribute = config.attribute || msg.attribute
