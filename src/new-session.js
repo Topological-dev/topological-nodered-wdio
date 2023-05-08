@@ -12,11 +12,11 @@ module.exports = function(RED) {
         const webdriverConfig = Object.assign(
           { logLevel: config.logLevel },
           parseUri(config.webdriverUri || msg.webdriverUri, node),
-          config.browser != "custom"? getCapabilities(
+          getCapabilities(
             config.webdriverProvider,
             config.webdriverBrowser,
-            config.browserlessToken
-          ) : msg.capabilities
+            msg
+          )
         )
         node.log = `Open new browser.`
         let b = await common.newSession(webdriverConfig, node, node.context())
@@ -72,10 +72,13 @@ const parseUri = (uri, node) => {
   return uriComponents
 }
 
-const getCapabilities = (vendor, browser) => {
+const getCapabilities = (vendor, browser, msg) => {
   let capabilities
 
-  if (vendor === 'browserless.io') {
+  if(browser == 'custom'){
+    capabilities = msg.capabilities
+  }
+  else if (vendor === 'browserless.io') {
     capabilities = {
       browserName: browser,
       'goog:chromeOptions': {
