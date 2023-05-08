@@ -12,11 +12,11 @@ module.exports = function(RED) {
         const webdriverConfig = Object.assign(
           { logLevel: config.logLevel },
           parseUri(config.webdriverUri || msg.webdriverUri, node),
-          getCapabilities(
+          config.browser != "custom"? getCapabilities(
             config.webdriverProvider,
-            config.webdriverBrowser || msg.webdriverBrowser,
+            config.webdriverBrowser,
             config.browserlessToken
-          )
+          ) : msg.capabilities
         )
         node.log = `Open new browser.`
         let b = await common.newSession(webdriverConfig, node, node.context())
