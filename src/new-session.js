@@ -58,8 +58,8 @@ const parseUri = (uri, node) => {
     uriComponents = {
       protocol: parsed[1],
       hostname: parsed[2],
-      //port: parseInt(parsed[3]),
-      path: parsed[3]
+      port: parseInt(parsed[3]),
+      path: parsed[4]
     }
   } catch (e) {
     common.handleError(
