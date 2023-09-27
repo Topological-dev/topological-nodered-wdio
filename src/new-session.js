@@ -53,8 +53,7 @@ const parseUri = (uri, node) => {
   let uriComponents
   try {
     if (uri[uri.length - 1] !== '/') uri += '/'
-    //let parsed = uri.match(/(\w+):\/\/(.+):(\d+)(\/.*)/)
-    let parsed = uri.match(/(\w+):\/\/(.+)(\/.*)/)
+    let parsed = uri.match(/(\w+):\/\/(.+):(\d+)(\/.*)/)
     uriComponents = {
       protocol: parsed[1],
       hostname: parsed[2],
