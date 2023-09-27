@@ -1,7 +1,7 @@
 {
   "name": "topological-nodered-wdio",
   "description": "Open source WebdriverIO nodes for Node-RED",
-  "version": "0.4.7",
+  "version": "0.4.8",
   "author": "topological",
   "license": "MIT",
   "repository": {
@@ -31,8 +31,8 @@
   },
   "dependencies": {
     "@wdio/allure-reporter": "^7.19.7",
-    "@wdio/cli": "^7.19.7",
-    "webdriverio": "^7.19.7"
+    "@wdio/cli": "^8.16.6",
+    "webdriverio": "^8.16.6"
   },
   "publishConfig": {
     "access": "public"
