@@ -1,0 +1,46 @@
+<script type="text/javascript">  
+    RED.nodes.registerType('document-helper', {
+      category: 'Webdriver IO',
+      color: '#E2D96E',
+      defaults: {
+        name: { value: '' },
+        desc: { value: '' }
+      },
+      inputs: 1,
+      outputs: 1,
+      icon: 'font-awesome/fa-file-text-o',
+      label: function() {
+        return this.name || 'document-helper'
+      }
+    })
+  </script>
+  
+  <script type="text/x-red" data-template-name="document-helper">
+    
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input id="node-input-name" type="text">
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-desc"><i class="fa fa-tag"></i> Description</label>
+        <textarea id="node-input-desc" name="node-input-desc" rows="20" cols="50" style="min-width:70%; "/>
+    </div>
+  </script>
+  
+  
+  
+  <script type="text/x-red" data-help-name="document-helper">
+    <h3>Log helper node uses to add notes to <code>global.document</code></h3>
+    <h3>Details</h3>
+        <dl class="message-properties">
+            <dt>Name: name of the log to be added to <code>global.document</code></dt>
+            <dt>Description: more details about the node</dt>
+        </dl>
+  
+    <h3>Outputs</h3>
+        <dl class="message-properties">
+            <dt>msg: <span class="property-type">object</span></dt>
+        </dl>
+  
+  </script>

@@ -1,7 +1,7 @@
 {
   "name": "topological-nodered-wdio",
   "description": "Open source WebdriverIO nodes for Node-RED",
-  "version": "0.5.0",
+  "version": "0.5.2",
   "author": "topological",
   "license": "MIT",
   "repository": {
@@ -26,7 +26,8 @@
       "frame-action": "src/frame-action.js",
       "execute-script": "src/execute-script.js",
       "explicit-wait": "src/explicit-wait.js",
-      "implicit-wait-config": "src/implicit-wait-config.js"
+      "implicit-wait-config": "src/implicit-wait-config.js",
+      "document-helper": "src/document-helper.js"
     }
   },
   "dependencies": {

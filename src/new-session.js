@@ -11,7 +11,8 @@ module.exports = function(RED) {
       try {
         const webdriverConfig = Object.assign(
           { logLevel: config.logLevel },
-          parseUri(config.webdriverUri || msg.webdriverUri, node),
+          { baseUrl: config.webdriverUri || msg.webdriverUri },
+          //parseUri(config.webdriverUri || msg.webdriverUri, node),
           getCapabilities(
             config.webdriverProvider,
             config.webdriverBrowser,
