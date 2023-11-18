@@ -4,6 +4,8 @@ module.exports = function(RED) {
   function documentHelper(config) {
     RED.nodes.createNode(this, config)
     const node = this
+    node.refUrl = config.refUrl
+    node.line = config.line
     common.clearStatus(node)
 
     node.on('input', async (msg) => {

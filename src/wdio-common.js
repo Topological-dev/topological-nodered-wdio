@@ -156,7 +156,8 @@ module.exports.log = async (node) => {
 
 module.exports.document = async (node) => {
   let context = node.context()
-  let name = node.name
   let document = await context.global.get('document') || ''
-  await context.global.set('document', `${document}\n********************\n${name}\n********************`)
+  document = node.line? `${document}\n\n${node.name}\n${node.refUrl? `Ref: ${node.refUrl}`:''}\n\n` : 
+                          `${document}\n********************\n${node.name}\n${node.refUrl? `Ref: ${node.refUrl}`:''}\n********************`
+  await context.global.set('document', document.replaceAll('\\n','\n'))
 }
