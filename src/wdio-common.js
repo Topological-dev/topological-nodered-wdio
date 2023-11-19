@@ -150,14 +150,14 @@ module.exports.log = async (node) => {
   let context = node.context()
   let stepCount = await (context.global.get('stepCount') || 0) + 1
   let document = await context.global.get('document') || ''
-  await context.global.set('document', `${document}\n${stepCount}. Node: ${node.name} - ${node.log}`)
+  await context.global.set('document', `${document}${stepCount}. Node: ${node.name} - ${node.log}\n`)
   await context.global.set('stepCount', stepCount)
 }
 
 module.exports.document = async (node) => {
   let context = node.context()
   let document = await context.global.get('document') || ''
-  document = node.line? `${document}\n\n${node.name}\n${node.refUrl? `Ref: ${node.refUrl}`:''}\n\n` : 
-                          `${document}\n********************\n${node.name}\n${node.refUrl? `Ref: ${node.refUrl}`:''}\n********************`
+  document = node.line? `${document}\n${node.name}${node.refUrl? `\nRef: ${node.refUrl}`:''}\n\n` : 
+                          `${document}********************\n${node.name}${node.refUrl? `\nRef: ${node.refUrl}`:''}\n********************\n`
   await context.global.set('document', document.replaceAll('\\n','\n'))
 }
